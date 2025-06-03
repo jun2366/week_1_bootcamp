@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      position: relative;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #a8ffeb 0%, #b8ffe2 100%);
+    }
+    .login-form-container {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      margin: 24px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      padding: 24px 32px;
+      width: 320px;
+      z-index: 100;
+    }
+    .login-form-container h2 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .flash-messages {
+      margin-bottom: 18px;
+      padding: 10px;
+      background: #e0fff5;
+      color: #218c74;
+      border: 1px solid #37d8a7;
+      border-radius: 5px;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .login-form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .login-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .register-link {
+      font-size: 0.97rem;
+    }
+    .register-link a {
+      color: #37d8a7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+    .login-form button[type="submit"] {
+      padding: 8px 20px;
+      background: #37d8a7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-form button[type="submit"]:hover {
+      background: #23b388;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-form-container">
+    <h2>Login</h2>
+    {# --- FLASH MESSAGE BLOCK --- #}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form class="login-form" method="post" action="{{ url_for('login') }}">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" required autocomplete="off">
+
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" required autocomplete="off">
+
+      <div class="login-actions">
+        <div class="register-link">
+          <a href="{{ url_for('register') }}">Register</a>
+        </div>
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
